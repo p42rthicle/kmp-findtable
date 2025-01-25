@@ -1,17 +1,20 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    // Default
+//    alias(libs.plugins.kotlinMultiplatform)
+//    alias(libs.plugins.androidLibrary)
+
+    kotlin("multiplatform")
+    id("com.android.library")
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = JavaVersion.VERSION_17.toString()
             }
         }
     }
-    
     listOf(
         iosX64(),
         iosArm64(),
@@ -23,12 +26,39 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     sourceSets {
-        commonMain.dependencies {
-            //put your multiplatform dependencies here
+        val commonMain by getting {
+            kotlin.srcDirs("src/commonMain/kotlin")
+            dependencies {
+                implementation(libs.datetime)
+                implementation(libs.napier)
+            }
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        // Default
+//        commonMain.dependencies {
+//            //put your multiplatform dependencies here
+//            implementation(libs.datetime)
+//            implementation(libs.napier)
+//        }
+//        commonTest.dependencies {
+//            implementation(libs.kotlin.test)
+//        }
+
+        val androidMain by getting {
+            kotlin.srcDirs("src/androidMain/kotlin")
+        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            kotlin.srcDirs("src/iosMain/kotlin")
         }
     }
 }
@@ -40,7 +70,7 @@ android {
         minSdk = 26
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
