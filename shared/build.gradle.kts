@@ -30,24 +30,24 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
-            kotlin.srcDirs("src/commonMain/kotlin")
             dependencies {
                 implementation(libs.datetime)
                 implementation(libs.napier)
             }
         }
-        // Default
 //        commonMain.dependencies {
-//            //put your multiplatform dependencies here
 //            implementation(libs.datetime)
 //            implementation(libs.napier)
 //        }
+        // Default
 //        commonTest.dependencies {
 //            implementation(libs.kotlin.test)
 //        }
 
         val androidMain by getting {
-            kotlin.srcDirs("src/androidMain/kotlin")
+            dependencies {
+                // Android-specific dependencies if needed
+            }
         }
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -58,7 +58,6 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-            kotlin.srcDirs("src/iosMain/kotlin")
         }
     }
 }
