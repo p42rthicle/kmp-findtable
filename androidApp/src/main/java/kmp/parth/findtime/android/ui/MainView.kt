@@ -26,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import kmp.parth.findtime.android.ui.worldclocks.AddTimeZoneDialog
+import kmp.parth.findtime.android.ui.worldclocks.TimeZoneScreen
 
 sealed class Screen(val title: String) {
     data object TimeZonesScreen : Screen("Timezones")
@@ -104,7 +106,26 @@ fun MainView(actionBar: topBarFun = { EmptyComposable() }) {
                 }
             }
         ) { padding ->
+            if (showAddDialog) {
+                AddTimeZoneDialog(
+                    onAdd = { newTimezones ->
+                        showAddDialog = false
+                        for (zone in newTimezones) {
+                            if (!currentTimezoneStrings.contains(zone)) {
+                                currentTimezoneStrings.add(zone)
+                            }
+                        }
+                    },
+                    onDismiss = {
+                        showAddDialog = false
+                    }
+                )
+            }
             Box(modifier = Modifier.padding(padding)) {
+                when (selectedIndex) {
+                    0 -> TimeZoneScreen(currentTimezoneStrings)
+                    // 1 -> FindMeetingScreen(currentTimezoneStrings)
+                }
 
             }
         }

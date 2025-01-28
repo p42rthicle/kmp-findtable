@@ -51,6 +51,8 @@ fun <T> AnimatedSwipeDismiss(
         SwipeToDismissBox(
             modifier = modifier,
             state = dismissState,
+            enableDismissFromStartToEnd = false,
+            enableDismissFromEndToStart = true,
             backgroundContent = { background(isDismissed) },
             content = { content(isDismissed) }
         )

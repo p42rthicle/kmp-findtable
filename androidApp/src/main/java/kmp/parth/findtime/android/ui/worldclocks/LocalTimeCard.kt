@@ -55,7 +55,7 @@ fun LocalTimeCard(
                 Column(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Spacer(modifier = Modifier.height(8.dp)) // Add top space
+                    Spacer(modifier = Modifier.height(12.dp)) // Add top space
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically // Align items vertically
