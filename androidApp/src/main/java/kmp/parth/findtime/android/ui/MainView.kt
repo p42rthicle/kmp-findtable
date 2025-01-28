@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import kmp.parth.findtime.android.ui.findmeeting.FindMeetingScreen
 import kmp.parth.findtime.android.ui.worldclocks.AddTimeZoneDialog
 import kmp.parth.findtime.android.ui.worldclocks.TimeZoneScreen
 
@@ -124,7 +125,7 @@ fun MainView(actionBar: topBarFun = { EmptyComposable() }) {
             Box(modifier = Modifier.padding(padding)) {
                 when (selectedIndex) {
                     0 -> TimeZoneScreen(currentTimezoneStrings)
-                    // 1 -> FindMeetingScreen(currentTimezoneStrings)
+                     1 -> FindMeetingScreen(currentTimezoneStrings)
                 }
 
             }
